@@ -1,0 +1,35 @@
+{
+  "actorSpecification": 1,
+  "name": "datagovin-sentinel",
+  "title": "DataGovIN Sentinel - India Open Data Actor",
+  "version": "1.0.0",
+  "buildTag": "latest",
+  "dockerfile": "./Dockerfile",
+  "readme": "./README.md",
+  "input": "./INPUT_SCHEMA.json",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "title": "DataGovIN Results",
+      "views": {
+        "overview": {
+          "title": "Overview",
+          "transformation": {
+            "fields": [
+              "id",
+              "title",
+              "organization",
+              "sector",
+              "qualityScore",
+              "resourceCount",
+              "modifiedDate"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  }
+}

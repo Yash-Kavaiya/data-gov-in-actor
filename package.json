@@ -1,0 +1,49 @@
+{
+  "name": "datagovin-sentinel-actor",
+  "version": "1.0.0",
+  "description": "Production-ready AI actor for advanced interaction with India's data.gov.in Open Government Data Platform, featuring intelligent discovery, secure retrieval, ethical analysis, and compliance with OGD Policy 2025",
+  "main": "src/main.js",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "DataGovIN Sentinel Team",
+    "email": "support@example.com"
+  },
+  "keywords": [
+    "data.gov.in",
+    "open-data",
+    "india",
+    "government-data",
+    "CKAN",
+    "OGD",
+    "analytics",
+    "apify",
+    "scraper"
+  ],
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "apify": "^3.1.10",
+    "axios": "^1.6.2",
+    "axios-retry": "^4.0.0",
+    "bottleneck": "^2.19.5",
+    "csv-parse": "^5.5.3",
+    "csv-stringify": "^6.4.5",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "p-queue": "^8.0.1",
+    "simple-statistics": "^7.8.3",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/data-gov-in-actor"
+  }
+}
