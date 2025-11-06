@@ -1,0 +1,296 @@
+{
+  "title": "DataGovIN Sentinel - Input Configuration",
+  "description": "Configure search parameters, authentication, output formats, and analytics options for the data.gov.in actor",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "mode": {
+      "title": "Operation Mode",
+      "type": "string",
+      "description": "Primary operation mode for the actor",
+      "enum": ["search", "retrieve", "analyze", "monitor"],
+      "enumTitles": ["Search & Discovery", "Data Retrieval", "Analytics & Insights", "Continuous Monitoring"],
+      "default": "search",
+      "editor": "select"
+    },
+    "query": {
+      "title": "Search Query",
+      "type": "string",
+      "description": "Natural language or keyword search query (e.g., 'GDP data 2024', 'healthcare statistics')",
+      "editor": "textfield",
+      "example": "agriculture production statistics"
+    },
+    "filters": {
+      "title": "Advanced Filters",
+      "type": "object",
+      "description": "Structured filters for refined search",
+      "editor": "json",
+      "properties": {
+        "organization": {
+          "title": "Organization/Ministry",
+          "type": "string",
+          "description": "Filter by government organization (e.g., 'Ministry of Finance')",
+          "editor": "textfield"
+        },
+        "sector": {
+          "title": "Sector",
+          "type": "string",
+          "description": "Data sector (e.g., 'Health', 'Education', 'Finance')",
+          "editor": "textfield"
+        },
+        "format": {
+          "title": "Resource Format",
+          "type": "array",
+          "description": "Preferred data formats",
+          "editor": "select",
+          "items": {
+            "type": "string",
+            "enum": ["CSV", "JSON", "XML", "XLS", "XLSX", "PDF", "API"]
+          },
+          "uniqueItems": true
+        },
+        "tags": {
+          "title": "Tags",
+          "type": "array",
+          "description": "Filter by specific tags",
+          "editor": "stringList",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dateFrom": {
+          "title": "Data From Date",
+          "type": "string",
+          "description": "Filter datasets updated after this date (YYYY-MM-DD)",
+          "editor": "textfield",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "dateTo": {
+          "title": "Data To Date",
+          "type": "string",
+          "description": "Filter datasets updated before this date (YYYY-MM-DD)",
+          "editor": "textfield",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      }
+    },
+    "datasetIds": {
+      "title": "Specific Dataset IDs",
+      "type": "array",
+      "description": "List of specific dataset IDs to retrieve (bypasses search)",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maxResults": {
+      "title": "Maximum Results",
+      "type": "integer",
+      "description": "Maximum number of datasets to process (1-1000)",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 1000,
+      "editor": "number"
+    },
+    "includeResources": {
+      "title": "Include Resource Data",
+      "type": "boolean",
+      "description": "Download and analyze actual resource files (not just metadata)",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "resourceLimit": {
+      "title": "Resource Download Limit",
+      "type": "integer",
+      "description": "Maximum number of resources to download per dataset (1-10)",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 10,
+      "editor": "number"
+    },
+    "maxFileSize": {
+      "title": "Max File Size (MB)",
+      "type": "integer",
+      "description": "Maximum file size to download in megabytes",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 500,
+      "editor": "number"
+    },
+    "analytics": {
+      "title": "Analytics Options",
+      "type": "object",
+      "description": "Configure analytics and processing",
+      "editor": "json",
+      "properties": {
+        "enableStatistics": {
+          "title": "Enable Statistical Analysis",
+          "type": "boolean",
+          "description": "Perform descriptive statistics on numerical data",
+          "default": false
+        },
+        "enableTrends": {
+          "title": "Enable Trend Analysis",
+          "type": "boolean",
+          "description": "Detect trends in time-series data",
+          "default": false
+        },
+        "dataQualityScore": {
+          "title": "Calculate Data Quality Score",
+          "type": "boolean",
+          "description": "Assess data quality based on completeness and consistency",
+          "default": true
+        },
+        "generateVisualizations": {
+          "title": "Generate Visualizations",
+          "type": "boolean",
+          "description": "Create charts and visual summaries",
+          "default": false
+        }
+      }
+    },
+    "output": {
+      "title": "Output Configuration",
+      "type": "object",
+      "description": "Configure output formats and options",
+      "editor": "json",
+      "properties": {
+        "format": {
+          "title": "Primary Output Format",
+          "type": "string",
+          "enum": ["json", "csv", "both"],
+          "default": "json",
+          "description": "Format for actor output"
+        },
+        "includeMetadata": {
+          "title": "Include Full Metadata",
+          "type": "boolean",
+          "default": true,
+          "description": "Include complete dataset metadata"
+        },
+        "includePreview": {
+          "title": "Include Data Preview",
+          "type": "boolean",
+          "default": true,
+          "description": "Include preview of first 100 rows"
+        },
+        "compressionFormat": {
+          "title": "Compression Format",
+          "type": "string",
+          "enum": ["none", "zip", "gzip"],
+          "default": "none",
+          "description": "Compress output files"
+        }
+      }
+    },
+    "authentication": {
+      "title": "API Authentication",
+      "type": "object",
+      "description": "Authentication credentials for data.gov.in API",
+      "editor": "json",
+      "properties": {
+        "apiKey": {
+          "title": "API Key",
+          "type": "string",
+          "description": "Your data.gov.in API key (optional for public data)",
+          "editor": "textfield",
+          "isSecret": true
+        },
+        "enableOAuth": {
+          "title": "Enable OAuth 2.0",
+          "type": "boolean",
+          "description": "Use OAuth 2.0 authentication (for premium features)",
+          "default": false
+        },
+        "oauthToken": {
+          "title": "OAuth Token",
+          "type": "string",
+          "description": "OAuth 2.0 access token",
+          "editor": "textfield",
+          "isSecret": true
+        }
+      }
+    },
+    "rateLimit": {
+      "title": "Rate Limit Configuration",
+      "type": "object",
+      "description": "Configure rate limiting to comply with API policies",
+      "editor": "json",
+      "properties": {
+        "requestsPerHour": {
+          "title": "Requests Per Hour",
+          "type": "integer",
+          "description": "Maximum requests per hour (default: 2000 as per OGD Policy)",
+          "default": 1800,
+          "minimum": 100,
+          "maximum": 2000
+        },
+        "concurrentRequests": {
+          "title": "Concurrent Requests",
+          "type": "integer",
+          "description": "Number of parallel requests",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 10
+        },
+        "retryAttempts": {
+          "title": "Retry Attempts",
+          "type": "integer",
+          "description": "Number of retry attempts for failed requests",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
+    },
+    "governance": {
+      "title": "Governance & Compliance",
+      "type": "object",
+      "description": "Compliance and ethical data handling options",
+      "editor": "json",
+      "properties": {
+        "respectLicenses": {
+          "title": "Respect License Restrictions",
+          "type": "boolean",
+          "description": "Enforce CC-BY 4.0 and other license requirements",
+          "default": true
+        },
+        "blockRestrictedData": {
+          "title": "Block Restricted Datasets",
+          "type": "boolean",
+          "description": "Skip datasets marked as restricted or internal-use",
+          "default": true
+        },
+        "enableAuditLog": {
+          "title": "Enable Audit Logging",
+          "type": "boolean",
+          "description": "Log all operations for compliance tracking",
+          "default": true
+        },
+        "piiDetection": {
+          "title": "PII Detection & Redaction",
+          "type": "boolean",
+          "description": "Detect and redact personally identifiable information",
+          "default": true
+        }
+      }
+    },
+    "language": {
+      "title": "Language Preference",
+      "type": "string",
+      "description": "Preferred language for multilingual content",
+      "enum": ["en", "hi", "both"],
+      "enumTitles": ["English", "Hindi", "Both"],
+      "default": "en",
+      "editor": "select"
+    },
+    "debugMode": {
+      "title": "Debug Mode",
+      "type": "boolean",
+      "description": "Enable verbose logging for debugging",
+      "default": false,
+      "editor": "checkbox"
+    }
+  },
+  "required": []
+}
