@@ -193,8 +193,7 @@
           "title": "API Key",
           "type": "string",
           "description": "Your data.gov.in API key (optional for public data)",
-          "editor": "textfield",
-          "isSecret": true
+          "editor": "textfield"
         },
         "enableOAuth": {
           "title": "Enable OAuth 2.0",
@@ -206,8 +205,7 @@
           "title": "OAuth Token",
           "type": "string",
           "description": "OAuth 2.0 access token",
-          "editor": "textfield",
-          "isSecret": true
+          "editor": "textfield"
         }
       }
     },
