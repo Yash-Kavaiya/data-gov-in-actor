@@ -4,7 +4,7 @@
  * Complies with OGD Policy 2025, DPDP Act 2023, and CC-BY 4.0 licensing
  */
 
-const Apify = require('apify');
+const { Actor } = require('apify');
 const DataGovINClient = require('./api-client');
 const SearchDiscovery = require('./search-discovery');
 const DataAcquisition = require('./data-acquisition');
@@ -13,11 +13,11 @@ const GovernanceLayer = require('./governance');
 const { formatDatasetMetadata, createError } = require('./utils');
 
 // Main actor function
-Apify.main(async () => {
+Actor.main(async () => {
     console.log('🚀 DataGovIN Sentinel Actor Starting...');
 
     // Get input configuration
-    const input = await Apify.getInput();
+    const input = await Actor.getInput();
 
     // Validate input
     if (!input) {
@@ -182,12 +182,12 @@ Apify.main(async () => {
         };
 
         // Save to dataset
-        await Apify.pushData(finalOutput);
+        await Actor.pushData(finalOutput);
 
         // Also save individual results for easier processing
         if (results.length > 0) {
             for (const result of results) {
-                await Apify.pushData(result);
+                await Actor.pushData(result);
             }
         }
 
@@ -201,7 +201,7 @@ Apify.main(async () => {
         console.error('❌ Actor execution failed:', error.message);
 
         // Save error to dataset
-        await Apify.pushData({
+        await Actor.pushData({
             success: false,
             error: {
                 message: error.message,
