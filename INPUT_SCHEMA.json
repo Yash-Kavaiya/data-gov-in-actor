@@ -186,15 +186,14 @@
     "authentication": {
       "title": "API Authentication",
       "type": "object",
-      "description": "Authentication credentials for data.gov.in API",
+      "description": "Authentication credentials for data.gov.in API (sensitive data - handle securely)",
       "editor": "json",
       "properties": {
         "apiKey": {
           "title": "API Key",
           "type": "string",
-          "description": "Your data.gov.in API key (optional for public data)",
-          "editor": "textfield",
-          "isSecret": true
+          "description": "⚠️ SENSITIVE: Your data.gov.in API key (optional for public data). This value will be stored securely.",
+          "editor": "textfield"
         },
         "enableOAuth": {
           "title": "Enable OAuth 2.0",
@@ -205,9 +204,8 @@
         "oauthToken": {
           "title": "OAuth Token",
           "type": "string",
-          "description": "OAuth 2.0 access token",
-          "editor": "textfield",
-          "isSecret": true
+          "description": "⚠️ SENSITIVE: OAuth 2.0 access token. This value will be stored securely.",
+          "editor": "textfield"
         }
       }
     },
