@@ -192,9 +192,8 @@
         "apiKey": {
           "title": "API Key",
           "type": "string",
-          "description": "Your data.gov.in API key (optional for public data)",
-          "editor": "textfield",
-          "isSecret": true
+          "description": "Your data.gov.in API key (optional for public data). Store sensitive keys in Apify Secret Storage.",
+          "editor": "textfield"
         },
         "enableOAuth": {
           "title": "Enable OAuth 2.0",
@@ -205,9 +204,8 @@
         "oauthToken": {
           "title": "OAuth Token",
           "type": "string",
-          "description": "OAuth 2.0 access token",
-          "editor": "textfield",
-          "isSecret": true
+          "description": "OAuth 2.0 access token. Store sensitive tokens in Apify Secret Storage.",
+          "editor": "textfield"
         }
       }
     },
